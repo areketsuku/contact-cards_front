@@ -1,38 +1,38 @@
 import { defineConfig } from "eslint/config";
-import globals from "globals";
 
-export default defineConfig([
-  {
-    files: ["**/*.{js,mjs,cjs,ts,mts,cts,jsx,tsx}"],
-    extends: ["eslint:recommended"],
-    languageOptions: { globals: globals.browser },
-    ignores: [
-      "node_modules/**",
-      "dist/**",
-      ".github/**",
-      "frontend/workflows/**",
-      "backend/workflows/**"
-    ]
-  },
-  {
-    files: ["**/*.{ts,tsx}"],
-    extends: ["plugin:@typescript-eslint/recommended"],
-    parser: "@typescript-eslint/parser",
-    plugins: ["@typescript-eslint"],
-  },
-  {
-    files: ["**/*.{js,jsx,ts,tsx}"],
-    extends: ["plugin:react/recommended"],
-    plugins: ["react", "react-hooks"],
-    rules: {
-      "react/display-name": "off",
-    },
-    settings: {
-      react: { version: "detect" },
+export default defineConfig({
+  parser: "@typescript-eslint/parser",
+  parserOptions: {
+    ecmaVersion: 2021,
+    sourceType: "module",
+    ecmaFeatures: {
+      jsx: true,
     },
   },
-  {
-    files: ["**/*.json"],
-    extends: ["json/recommended"],
+  plugins: ["@typescript-eslint", "react", "react-hooks"],
+  extends: [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react/recommended",
+  ],
+  env: {
+    browser: true,
+    node: true,
+    es2021: true,
   },
-]);
+  settings: {
+    react: {
+      version: "detect",
+    },
+  },
+  rules: {
+    "react/display-name": "off",
+  },
+  ignorePatterns: [
+    "node_modules/",
+    "dist/",
+    ".github/",
+    "frontend/workflows/",
+    "backend/workflows/",
+  ],
+});
