@@ -22,7 +22,7 @@ jobs:
         run: yarn install --frozen-lockfile
 
       - name: EditorConfig validation
-        run: npx eclint
+        run: npx eclint check "src/**/*"
 
       - name: ESLint
         run: yarn eslint .
