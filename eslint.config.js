@@ -1,15 +1,10 @@
-import js from "@eslint/js";
-import globals from "globals";
-import tseslint from "typescript-eslint";
-import pluginReact from "eslint-plugin-react";
-import json from "@eslint/json";
 import { defineConfig } from "eslint/config";
+import globals from "globals";
 
 export default defineConfig([
   {
     files: ["**/*.{js,mjs,cjs,ts,mts,cts,jsx,tsx}"],
-    plugins: { js },
-    extends: ["js/recommended"],
+    extends: ["eslint:recommended"],
     languageOptions: { globals: globals.browser },
     ignores: [
       "node_modules/**",
@@ -19,24 +14,25 @@ export default defineConfig([
       "backend/workflows/**"
     ]
   },
-  tseslint.configs.recommended,
+  {
+    files: ["**/*.{ts,tsx}"],
+    extends: ["plugin:@typescript-eslint/recommended"],
+    parser: "@typescript-eslint/parser",
+    plugins: ["@typescript-eslint"],
+  },
   {
     files: ["**/*.{js,jsx,ts,tsx}"],
-    plugins: { react: pluginReact },
     extends: ["plugin:react/recommended"],
+    plugins: ["react", "react-hooks"],
     rules: {
       "react/display-name": "off",
     },
     settings: {
-      react: {
-        version: "detect",
-      },
+      react: { version: "detect" },
     },
   },
   {
     files: ["**/*.json"],
-    plugins: { json },
-    language: "json/json",
-    extends: ["json/recommended"]
+    extends: ["json/recommended"],
   },
 ]);
