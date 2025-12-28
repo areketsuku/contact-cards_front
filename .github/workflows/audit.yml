@@ -4,6 +4,11 @@ on:
   push:
   pull_request:
 
+concurrency:
+  group: "audit-${{ github.ref }}"
+  cancel-in-progress: true
+
+
 jobs:
   audit:
     runs-on: ubuntu-latest
