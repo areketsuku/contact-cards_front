@@ -19,12 +19,24 @@ export default defineConfig([
       "backend/workflows/**"
     ]
   },
-    tseslint.configs.recommended,
-    pluginReact.configs.flat.recommended,
-    {
-      files: ["**/*.json"],
-      plugins: { json },
-      language: "json/json",
-      extends: ["json/recommended"]
+  tseslint.configs.recommended,
+  {
+    files: ["**/*.{js,jsx,ts,tsx}"],
+    plugins: { react: pluginReact },
+    extends: ["plugin:react/recommended"],
+    rules: {
+      "react/display-name": "off",
     },
+    settings: {
+      react: {
+        version: "detect",
+      },
+    },
+  },
+  {
+    files: ["**/*.json"],
+    plugins: { json },
+    language: "json/json",
+    extends: ["json/recommended"]
+  },
 ]);
