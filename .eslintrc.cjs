@@ -1,6 +1,5 @@
-import { defineConfig } from "eslint/config";
-
-export default defineConfig({
+module.exports = {
+  root: true,
   parser: "@typescript-eslint/parser",
   parserOptions: {
     ecmaVersion: 2021,
@@ -9,17 +8,17 @@ export default defineConfig({
       jsx: true,
     },
   },
+  env: {
+    browser: true,
+    node: true,
+    es2021: true,
+  },
   plugins: ["@typescript-eslint", "react", "react-hooks"],
   extends: [
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:react/recommended",
   ],
-  env: {
-    browser: true,
-    node: true,
-    es2021: true,
-  },
   settings: {
     react: {
       version: "detect",
@@ -32,7 +31,5 @@ export default defineConfig({
     "node_modules/",
     "dist/",
     ".github/",
-    "frontend/workflows/",
-    "backend/workflows/",
   ],
-});
+};
