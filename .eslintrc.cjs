@@ -25,6 +25,8 @@ module.exports = {
     },
   },
   rules: {
+    "react/react-in-jsx-scope": "off",
+    "react/jsx-no-target-blank": ["error", { allowReferrer: false }],
     "react/display-name": "off",
   },
   ignorePatterns: [
